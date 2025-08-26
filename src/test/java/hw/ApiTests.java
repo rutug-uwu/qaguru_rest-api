@@ -114,7 +114,11 @@ public class ApiTests extends TestBase {
                 .log().status()
                 .log().body()
                 .statusCode(200)
-                .body("id", instanceOf(Integer.class))
+                .body("id", allOf(
+                        instanceOf(Integer.class),
+                        notNullValue(),
+                        greaterThan(0)
+                ))
                 .body("token", allOf(
                         not(isEmptyOrNullString()),
                         hasLength(17)
